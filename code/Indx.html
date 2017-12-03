@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--Author: Amer Eddin Al MAzloum-->
+<!--Date:13-Nov-2017-->
+<!--References (if any)-->
+<!--Overall function of the code-->
+<!--Usage (a brief description of public methods, properties, and events)-->
+<!--The percentage of code written by the Me 90%-->
+<!--The percentage of code taken from course examples or other source 10%-->
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>REF2014 results</title>
+
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.tip.js"></script>
+    <script src="js/topojson.v1.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Ruluko" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/L1.css">
+    <link rel="stylesheet" href="css/L2.css">
+    <link rel="stylesheet" href="css/L3.css">
+    <link rel="stylesheet" href="css/icl1.css">
+
+
+</head>
+<body>
+
+
+<!--Navigation section-->
+<nav>
+    <ul>
+        <li class="nav-item">
+            <a id="student" onclick="loadEarlyCareer()">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                <br/>
+                <span class='line'>Early career academics</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a id="university" onclick="loadUniversityManagement()">
+                <i class="fa fa-university" aria-hidden="true"></i>
+                <br/>
+                <span class='line'>University management</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a id="collaborators" onclick="loadIndustrialCollaborators()">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <br/>
+                <span class='line'>Industrial collaborators</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<section id="section1">
+    <h3 class="section-title">Career Module</h3>
+    <div class="content">
+        <div class="row">
+            <div class="header">
+                <span class="title">UOA vs Institution Graph</span>
+                <p class="description">
+                    This chart gives information about how many UOA was teach in University.
+                    the chart shows the id of UOA by selecting any one the next chart will shows the location of this
+                    university's.
+                    to remove the selection only click agine to the same UOA and the filter will also remove
+                </p>
+                <span class="refresh">
+                    <a onclick="">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </div>
+            <div class="header">
+                <span class="title">Institution Location</span>
+                <p class="description">
+                    Map of Universities in the UK with some information shows the location of this Universities that can
+                    be filterd by the UOA .
+                    there is capability to zooming for more denials. by clicking any of this point the tree chart open
+                    to show more details.
+
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="cm1"></div>
+            <div id="cm2"></div>
+        </div>
+        <div class="row">
+            <span class="title">Institution Performance details</span>
+            <p class="description">
+                This Tree chart show the information for selected University first will show the main plan category,
+                by selected one of them the data will filterd and open the profile category and so on.the tooltip in
+                each step will shows details information
+
+            </p>
+        </div>
+        <div class="row">
+            <div id="cm3"></div>
+        </div>
+    </div>
+</section>
+
+<section id="section2">
+    <h3 class="section-title">University management</h3>
+    <div class="content">
+        <div class="row">
+            <div class="header">
+                <span class="title">UOA vs Institution Graph</span>
+                <p class="description">
+                    This chart gives information about how many UOA was teach in University.
+                    the chart shows the id of UOA by selecting any one the next chart will shows the location of this
+                    university's.
+                    to remove the selection only click agine to the same UOA and the filter will also remove
+                </p>
+                <span class="refresh">
+                    <a onclick="">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </div>
+            <div class="header">
+                <span class="title">Institution Location</span>
+                <p class="description">
+                    Map of Universities in the UK with some information shows the location of this Universities that can
+                    be filterd by the UOA .
+                    there is capability to zooming for more denials. by clicking any of this point the tree chart open
+                    to show more details.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="um1"></div>
+            <div id="um2"></div>
+        </div>
+        <div class="row">
+            <span class="title">Institution Performance details</span>
+            <p class="description">
+                This Tree chart show the information for selected University first will show the main plan category,
+                by selected one of them the data will filterd and open the profile category and so on.the tooltip in
+                each step will shows details information
+            </p>
+        </div>
+        <div class="row">
+            <div id="um3"></div>
+        </div>
+    </div>
+</section>
+
+
+<section id="section3">
+    <h3 class="section-title">Industrial collaborators</h3>
+    <div class="content">
+        <div class="row">
+            <div class="header">
+                <span class="title">UOA vs Institution Graph</span>
+                <p class="description">
+                    This chart gives information about how many UOA was teach in University.
+                    the chart shows the id of UOA by selecting any one the next chart will shows the location of this
+                    university's.
+                    to remove the selection only click agine to the same UOA and the filter will also remove
+                </p>
+                <ul class="change">
+                    <li><a onclick="ic1.update(1)">1*</a></li>
+                    <li><a onclick="ic1.update(2)">2*</a></li>
+                    <li><a onclick="ic1.update(3)">3*</a></li>
+                    <li><a onclick="ic1.update(4)">4*</a></li>
+                </ul>
+            </div>
+            <div class="header">
+                <span class="title">Institution Location</span>
+                <p class="description">
+                    Map of Universities in the UK with some information shows the location of this Universities that can
+                    be filterd by the UOA .
+                    there is capability to zooming for more denials. by clicking any of this point the tree chart open
+                    to show more details.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="ic1"></div>
+            <div id="ic2"></div>
+        </div>
+        <div class="row">
+            <span class="title">Institution Performance details</span>
+            <p class="description">
+                This Tree chart show the information for selected University first will show the main plan category,
+                by selected one of them the data will filterd and open the profile category and so on.the tooltip in
+                each step will shows details information </p>
+        </div>
+        <div class="row">
+            <div id="ic3"></div>
+        </div>
+    </div>
+</section>
+
+<!--java secript code-->
+
+<script type="text/javascript">
+
+    var section1 = document.getElementById("section1");
+    var section2 = document.getElementById("section2");
+    var section3 = document.getElementById("section3");
+
+    section1.style.display = 'none';
+    section2.style.display = 'none';
+    section3.style.display = 'none';
+
+    var ref14datafilepath = "resources/REF2014_Results.csv";
+    var learningProvidersDatafilepathe = "resources/learning-providers-plus.csv";
+    var ukmapjsonData = "resources/uk.json";
+
+    var ref14data, learningProviders, InstitutionPointData;
+
+    var cm1, cm2, cm3, um1, um2, um3, ic1, ic2, ic3;
+
+    function removeElements(el1, el2, el3) {
+        var layout1 = document.getElementById(el1);
+        var layout2 = document.getElementById(el2);
+        var layout3 = document.getElementById(el3);
+
+        while (layout1.hasChildNodes()) {
+            layout1.removeChild(layout1.lastChild);
+        }
+        while (layout2.hasChildNodes()) {
+            layout2.removeChild(layout2.lastChild);
+        }
+        while (layout3.hasChildNodes()) {
+            layout3.removeChild(layout3.lastChild);
+        }
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    function loadEarlyCareer() {
+
+        section1.style.display = 'block';
+        section2.style.display = 'none';
+        section3.style.display = 'none';
+        removeElements("cm1", "cm2", "cm3");
+
+
+        cm1 = barchart_cm("#cm1");
+        cm3 = treechart_cm("#cm3");
+        //Read REF2014 data
+        d3.csv(ref14datafilepath, function (csvData) {
+            ref14data = csvData;
+//
+            //Now read learning-providers-plus.csv
+            d3.csv(learningProvidersDatafilepathe, function (csvData) {
+                learningProviders = csvData;
+
+                InstitutionPointData = learningProviders.map(function (rec) {
+//
+                    var str = '{  "UKPRN":' + rec.UKPRN + ', "PROVIDER_NAME": "' + rec.PROVIDER_NAME + '", "LATITUDE":"' + rec.LATITUDE + '",   "LONGITUDE":"' + rec.LONGITUDE + '",   "TOWN":"' + rec.TOWN + '" ,   "WEBSITE_URL":"' + rec.WEBSITE_URL + '"}';
+                    var result = JSON.parse(str);
+//
+                    return result;
+                })
+//                     careerModulel = dashboard("#careerModule",ref14data,learningProviders,"../code/careerModule/Resources/uk.json");
+                cm1.loadAndRenderDataset(ref14data, InstitutionPointData);
+
+                cm2 = ukMap_cm("#cm2", ukmapjsonData);
+                cm2.loadAndRenderDataset(InstitutionPointData);
+
+            })
+
+
+        });
+
+    }
+
+    function loadUniversityManagement() {
+        section1.style.display = 'none';
+        section2.style.display = 'block';
+        section3.style.display = 'none';
+
+        removeElements("um1", "um2", "um3");
+
+        um1 = barchart_um("#um1");
+        um3 = treechart_um("#um3");
+
+        //Read REF2014 data
+        d3.csv(ref14datafilepath, function (csvData) {
+            ref14data = csvData;//
+            //Now read learning-providers-plus.csv
+            d3.csv(learningProvidersDatafilepathe, function (csvData) {
+                learningProviders = csvData;
+
+                InstitutionPointData = learningProviders.map(function (rec) {//
+                    var str = '{  "UKPRN":' + rec.UKPRN + ', "PROVIDER_NAME": "' + rec.PROVIDER_NAME + '", "LATITUDE":"' + rec.LATITUDE + '",   "LONGITUDE":"' + rec.LONGITUDE + '",   "TOWN":"' + rec.TOWN + '" ,   "WEBSITE_URL":"' + rec.WEBSITE_URL + '"}';
+                    var result = JSON.parse(str);
+//
+                    return result;
+                })
+                um1.loadAndRenderDataset(ref14data, InstitutionPointData);
+                um2 = ukMap_um("#um2", ukmapjsonData);
+                um2.loadAndRenderDataset(InstitutionPointData);
+//                um2.loadAndRenderDataset(setpiechartData(ref14data));
+//                function setpiechartData(data) {
+//                    var pieData;
+//                    // console.log("dataset ",dataset);
+//                    pieData =d3.nest()
+//                        .key(function(d) { return   d["Profile"]; })
+//                        .rollup(function(v) {return v.length; })
+//                        .entries(data);
+//                    return pieData;
+//                }
+            });
+
+
+        });
+    }
+
+    function loadIndustrialCollaborators() {
+        section1.style.display = 'none';
+        section2.style.display = 'none';
+        section3.style.display = 'block';
+
+        removeElements("ic1", "ic2", "ic3");
+
+        ic1 = barchart_ic("#ic1");
+        ic3 = treechart_ic("#ic3");
+        //Read REF2014 data
+        d3.csv(ref14datafilepath, function (csvData) {
+            ref14data = csvData;
+//                console.log("ref14data= ", ref14data);
+//
+            //Now read learning-providers-plus.csv
+            d3.csv(learningProvidersDatafilepathe, function (csvData) {
+                learningProviders = csvData;
+
+                InstitutionPointData = learningProviders.map(function (rec) {
+//                        console.log("learningProviders= ", rec);
+//
+                    var str = '{  "UKPRN":' + rec.UKPRN + ', "PROVIDER_NAME": "' + rec.PROVIDER_NAME + '", "LATITUDE":"' + rec.LATITUDE + '",   "LONGITUDE":"' + rec.LONGITUDE + '",   "TOWN":"' + rec.TOWN + '" ,   "WEBSITE_URL":"' + rec.WEBSITE_URL + '"}';
+                    var result = JSON.parse(str);
+//
+                    return result;
+                })
+//                     careerModulel = dashboard("#careerModule",ref14data,learningProviders,"../code/careerModule/Resources/uk.json");
+                ic1.loadAndRenderDataset(ref14data, InstitutionPointData);
+
+                ic2 = ukMap_ic("#ic2", ukmapjsonData);
+                ic2.loadAndRenderDataset(InstitutionPointData);
+
+//                careerModulel2.loadAndRenderDataset(InstitutionPointData);
+
+            })
+
+
+        });
+    }
+
+</script>
+<br/>
+
+
+</body>
+
+</html>
